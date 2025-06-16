@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel de Automação Residencial - Neto.dev</title>
+    <title>Painel de Automação - Neto.dev</title>
 
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="style.css">
 
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏠</text></svg>">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
 </head>
 <body>
     <header class="main-header">
@@ -15,9 +17,9 @@
             <h1>Smart Home Control Panel</h1>
             <nav>
                 <ul>
-                    <li><a href="#dashboard">Dashboard</a></li>
-                    <li><a href="#devices">Dispositivos</a></li>
-                    <li><a href="#settings">Configurações</a></li>
+                    <li><a href="#dashboard"><i class="fas fa-home"></i> Dashboard</a></li>
+                    <li><a href="#devices"><i class="fas fa-microchip"></i> Dispositivos</a></li>
+                    <li><a href="#settings"><i class="fas fa-cog"></i> Configurações</a></li>
                 </ul>
             </nav>
         </div>
@@ -30,8 +32,12 @@
 
             <div class="card-grid">
                 <div class="device-card active">
-                    <div class="device-icon">💡</div> <h3>Relé Principal</h3>
-                    <p class="relay-status {status_class}">Status: <span>{relay_status_text}</span></p>
+                    <div class="device-icon"><i class="fas fa-lightbulb"></i></div>
+                    <h3>Relé Principal</h3>
+                    <div class="status-display">
+                        <span class="status-dot {status_class}"></span>
+                        <p class="relay-status">Status: <span class="relay-text">{relay_status_text}</span></p>
+                    </div>
                     <div class="button-group">
                         <a href="/RELE/ON" class="control-button on">Ligar</a>
                         <a href="/RELE/OFF" class="control-button off">Desligar</a>
@@ -39,8 +45,12 @@
                 </div>
 
                 <div class="device-card inactive">
-                    <div class="device-icon">🌡️</div> <h3>Termostato</h3>
-                    <p class="relay-status inactive-status">Status: <span>Desativado</span></p>
+                    <div class="device-icon"><i class="fas fa-thermometer-half"></i></div>
+                    <h3>Termostato</h3>
+                    <div class="status-display">
+                        <span class="status-dot inactive-dot"></span>
+                        <p class="relay-status inactive-status">Status: <span class="relay-text">Desativado</span></p>
+                    </div>
                     <div class="button-group">
                         <button class="control-button disabled">Ativar</button>
                         <button class="control-button disabled">Desativar</button>
@@ -48,8 +58,12 @@
                 </div>
 
                 <div class="device-card inactive">
-                    <div class="device-icon">🚪</div> <h3>Fechadura Inteligente</h3>
-                    <p class="relay-status inactive-status">Status: <span>Trancado</span></p>
+                    <div class="device-icon"><i class="fas fa-door-closed"></i></div>
+                    <h3>Fechadura Inteligente</h3>
+                    <div class="status-display">
+                        <span class="status-dot inactive-dot"></span>
+                        <p class="relay-status inactive-status">Status: <span class="relay-text">Trancado</span></p>
+                    </div>
                     <div class="button-group">
                         <button class="control-button disabled">Abrir</button>
                         <button class="control-button disabled">Fechar</button>
@@ -57,8 +71,12 @@
                 </div>
 
                 <div class="device-card inactive">
-                    <div class="device-icon">📹</div> <h3>Câmera de Segurança</h3>
-                    <p class="relay-status inactive-status">Status: <span>Offline</span></p>
+                    <div class="device-icon"><i class="fas fa-video"></i></div>
+                    <h3>Câmera de Segurança</h3>
+                    <div class="status-display">
+                        <span class="status-dot inactive-dot"></span>
+                        <p class="relay-status inactive-status">Status: <span class="relay-text">Offline</span></p>
+                    </div>
                     <div class="button-group">
                         <button class="control-button disabled">Ver Live</button>
                         <button class="control-button disabled">Gravar</button>
@@ -76,12 +94,11 @@
             <h2 class="section-title">Configurações do Sistema</h2>
             <p>Ajuste as preferências e configurações de segurança.</p>
         </section>
-
     </main>
 
     <footer class="main-footer">
         <div class="container">
-            <p>&copy; 2025 Direitos Reservados Neto.dev</p>
+            <p>&copy; 2025 Todos os direitos reservados. Neto.dev</p>
             <p>Simulador de Automação Residencial</p>
         </div>
     </footer>
