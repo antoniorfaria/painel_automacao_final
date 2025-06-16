@@ -1,152 +1,196 @@
-/* style.css - Estilos para o Painel de Automação Residencial */
+/* style.css - Estilos para o Painel de Automação Residencial (Tema Tech-Black) */
+
+/* --- Importação de Fontes (Google Fonts) --- */
+/* 'Orbitron' para títulos e um toque futurista, 'Inter' para texto geral legível. */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Orbitron:wght@500;700&display=swap');
 
 /* --- Variáveis CSS --- */
-/* Definimos variáveis para cores, tamanhos e transições para facilitar a manutenção e a consistência. */
 :root {
-    /* Paleta de Cores (Tema Escuro Moderno) */
-    --color-bg-primary: #1a1a2e; /* Fundo principal escuro */
-    --color-bg-secondary: #16213e; /* Fundo de cards e cabeçalho, um pouco mais claro */
-    --color-text-light: #e0e0e0; /* Cor do texto principal (claro) */
-    --color-text-muted: #a0a0a0; /* Cor do texto secundário (cinza) */
-    --color-accent-blue: #0f3460; /* Azul escuro para detalhes e botões */
-    --color-button-on: #34e189; /* Verde neon para o botão "Ligar" */
-    --color-button-off: #e94560; /* Vermelho vibrante para o botão "Desligar" */
-    --color-status-on: #34e189; /* Verde neon para status "Ligado" */
-    --color-status-off: #e94560; /* Vermelho vibrante para status "Desligado" */
-    --color-disabled: #4a4a5a; /* Cor para elementos desativados */
-    --color-shadow-dark: rgba(0, 0, 0, 0.6); /* Sombra escura para profundidade */
+    /* Paleta de Cores (Tema Escuro Moderno e Tecnológico) */
+    --color-bg-primary: #0a0a0f; /* Preto muito escuro, quase total */
+    --color-bg-secondary: #12121a; /* Fundo de cards/cabeçalho, um pouco menos escuro */
+    --color-bg-tertiary: #1b1b26; /* Para detalhes mais claros, como bordas internas */
+    --color-text-light: #e0e0e0; /* Texto principal (quase branco) */
+    --color-text-muted: #888; /* Texto secundário (cinza médio) */
+    --color-accent-blue: #00bcd4; /* Ciano vibrante para destaques (links, status ON) */
+    --color-accent-purple: #8e24aa; /* Roxo para alguns detalhes ou botões OFF */
+    --color-button-on: #00e676; /* Verde neon para ligar */
+    --color-button-off: #ff1744; /* Vermelho vibrante para desligar */
+    --color-disabled: #333; /* Cor para elementos desativados */
+    --color-border-glow: #00bcd4; /* Cor para brilhos em bordas */
 
     /* Espaçamento e Bordas */
     --spacing-xs: 8px;
     --spacing-sm: 12px;
     --spacing-md: 20px;
     --spacing-lg: 32px;
-    --container-max-width: 1200px;
+    --container-max-width: 1300px;
     --border-radius-sm: 4px;
     --border-radius-md: 8px;
-    --border-radius-lg: 12px;
+    --border-radius-lg: 16px; /* Mais arredondado para cards */
+
+    /* Sombras e Brilhos */
+    --shadow-default: 0 4px 15px rgba(0, 0, 0, 0.4);
+    --shadow-deep: 0 10px 30px rgba(0, 0, 0, 0.6);
+    --glow-on: 0 0 15px var(--color-button-on), 0 0 25px var(--color-button-on);
+    --glow-off: 0 0 15px var(--color-button-off), 0 0 25px var(--color-button-off);
+    --glow-accent: 0 0 10px var(--color-accent-blue), 0 0 20px var(--color-accent-blue);
 
     /* Transições e Animações */
     --transition-fast: 0.2s ease-out;
     --transition-normal: 0.4s ease-in-out;
+    --transition-slow: 0.6s ease;
 }
 
 /* --- Reset Básico e Estilos Globais --- */
 * {
-    box-sizing: border-box; /* Garante que padding e border sejam incluídos na largura/altura total */
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
 body {
-    font-family: 'Roboto', 'Segoe UI', Arial, sans-serif; /* Prioriza Roboto, depois Segoe UI, etc. */
-    background-color: var(--color-bg-primary); /* Fundo principal escuro */
-    color: var(--color-text-light); /* Cor do texto padrão */
-    line-height: 1.6; /* Espaçamento entre linhas para melhor legibilidade */
-    display: flex; /* Usa Flexbox para o layout principal (cabeçalho, conteúdo, rodapé) */
-    flex-direction: column; /* Coloca os itens em coluna */
-    min-height: 100vh; /* Garante que o body ocupe no mínimo 100% da altura da viewport */
-    overflow-x: hidden; /* Evita rolagem horizontal indesejada */
+    font-family: 'Inter', sans-serif; /* Fonte principal para o corpo */
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-light);
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative; /* Para backgrounds ou overlays */
+}
+
+/* Efeito de fundo sutil de 'grade' tecnológica */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px; /* Tamanho da célula da grade */
+    opacity: 0.1;
+    z-index: -1; /* Garante que fique atrás do conteúdo */
 }
 
 /* --- Contêiner Central de Conteúdo --- */
-/* Usado para centralizar o conteúdo e limitar a largura máxima */
 .container {
     max-width: var(--container-max-width);
-    margin: 0 auto; /* Centraliza o bloco na página */
-    padding: 0 var(--spacing-md); /* Adiciona padding nas laterais */
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
 }
 
 /* --- Cabeçalho Principal (main-header) --- */
 .main-header {
-    background-color: var(--color-bg-secondary); /* Fundo do cabeçalho */
-    padding: var(--spacing-md) 0; /* Padding superior e inferior */
-    box-shadow: 0 4px 15px var(--color-shadow-dark); /* Sombra para dar profundidade */
+    background-color: var(--color-bg-secondary);
+    padding: var(--spacing-md) 0;
+    box-shadow: var(--shadow-deep);
+    border-bottom: 1px solid var(--color-bg-tertiary); /* Linha sutil */
 }
 
 .main-header .container {
     display: flex;
-    justify-content: space-between; /* Espaça o título e a navegação */
-    align-items: center; /* Alinha verticalmente */
-    flex-wrap: wrap; /* Permite quebrar linha em telas menores */
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
 .main-header h1 {
-    font-size: 2.2em;
-    color: var(--color-text-light);
-    letter-spacing: -0.03em; /* Ajuste sutil no espaçamento entre letras */
-    text-shadow: 1px 1px 5px rgba(0,0,0,0.8); /* Sombra no texto */
+    font-family: 'Orbitron', sans-serif; /* Fonte futurista para o título */
+    font-size: 2.5em;
+    color: var(--color-accent-blue);
+    letter-spacing: 0.05em;
+    text-shadow: var(--glow-accent); /* Brilho sutil no título */
+    transition: text-shadow var(--transition-normal);
+}
+
+.main-header h1:hover {
+    text-shadow: 0 0 20px var(--color-accent-blue), 0 0 35px var(--color-accent-blue);
 }
 
 .main-header nav ul {
-    list-style: none; /* Remove os marcadores de lista */
+    list-style: none;
     display: flex;
-    gap: var(--spacing-md); /* Espaçamento entre os itens da navegação */
+    gap: var(--spacing-lg);
 }
 
 .main-header nav a {
-    color: var(--color-text-muted); /* Cor padrão dos links de navegação */
-    text-decoration: none; /* Remove o sublinhado */
-    font-weight: 500;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    font-weight: 600;
     font-size: 1.1em;
-    transition: color var(--transition-fast), transform var(--transition-fast); /* Transição suave para hover */
+    transition: color var(--transition-fast), transform var(--transition-fast), text-shadow var(--transition-fast);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs); /* Espaço entre ícone e texto */
+}
+
+.main-header nav a i {
+    font-size: 1.2em; /* Tamanho do ícone */
 }
 
 .main-header nav a:hover {
-    color: var(--color-button-on); /* Altera a cor no hover */
-    transform: translateY(-2px); /* Efeito de "subir" no hover */
+    color: var(--color-accent-blue);
+    transform: translateY(-3px);
+    text-shadow: var(--glow-accent);
 }
 
 /* --- Conteúdo Principal (main-content) --- */
 .main-content {
-    flex-grow: 1; /* Faz com que o conteúdo ocupe todo o espaço vertical disponível */
-    padding: var(--spacing-lg) 0; /* Padding superior e inferior */
+    flex-grow: 1;
+    padding: var(--spacing-lg) 0;
 }
 
 .section-title {
-    font-size: 2.8em;
-    color: var(--color-text-light);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3em;
+    color: var(--color-accent-blue);
     text-align: center;
     margin-bottom: var(--spacing-lg);
-    position: relative; /* Para posicionar o pseudo-elemento `::after` */
+    position: relative;
     padding-bottom: 0.8rem;
-    animation: fadeInDown 0.8s ease-out forwards; /* Animação de entrada */
-    text-shadow: 1px 1px 5px rgba(0,0,0,0.7);
+    animation: fadeInDown 1s ease-out forwards;
+    text-shadow: var(--glow-accent);
+    letter-spacing: 0.04em;
 }
 
 .section-title::after {
-    content: ''; /* Conteúdo vazio para o pseudo-elemento */
+    content: '';
     position: absolute;
     left: 50%;
     bottom: 0;
-    transform: translateX(-50%); /* Centraliza a linha */
-    width: 100px;
+    transform: translateX(-50%);
+    width: 150px; /* Linha mais larga */
     height: 4px;
-    background-color: var(--color-button-on); /* Cor da linha */
+    background-color: var(--color-button-on);
     border-radius: 2px;
+    box-shadow: var(--glow-on); /* Brilho na linha */
 }
 
-/* Animação para títulos de seção (cai de cima para baixo e aparece) */
 @keyframes fadeInDown {
-    from { opacity: 0; transform: translateY(-30px); }
+    from { opacity: 0; transform: translateY(-50px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
 .status-message {
     text-align: center;
-    font-size: 1.3em;
-    font-weight: 600;
+    font-size: 1.5em;
+    font-weight: 700;
     color: var(--color-text-light);
-    background-color: var(--color-accent-blue); /* Fundo para a mensagem de status */
+    background: linear-gradient(90deg, var(--color-bg-tertiary), var(--color-bg-secondary)); /* Gradiente sutil */
     margin-bottom: var(--spacing-lg);
-    padding: 1rem 1.5rem;
+    padding: 1.2rem 2rem;
     border-radius: var(--border-radius-md);
-    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-    animation: fadeIn 1s ease-out forwards; /* Animação de aparecimento */
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    box-shadow: var(--shadow-default);
+    animation: fadeIn 1s ease-out forwards;
+    border: 1px solid var(--color-accent-blue); /* Borda destacada */
+    text-shadow: 0 0 8px rgba(0, 188, 212, 0.5); /* Brilho no texto */
 }
 
-/* Animação genérica de fade-in */
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
@@ -155,153 +199,218 @@ body {
 /* --- Grid para os Cards de Dispositivo --- */
 .card-grid {
     display: grid;
-    /* Adapta o número de colunas baseado na largura disponível, com no mínimo 280px por card */
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: var(--spacing-lg); /* Espaçamento entre os cards */
-    justify-content: center; /* Centraliza os cards no grid */
-    animation: fadeInUpGrid 1.5s ease-out forwards; /* Animação de entrada para o grid */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Cards um pouco maiores */
+    gap: var(--spacing-lg);
+    justify-content: center;
+    animation: fadeInUpGrid 1.5s ease-out forwards;
 }
 
-/* Animação para o grid de cards (surgem de baixo para cima) */
 @keyframes fadeInUpGrid {
-    from { opacity: 0; transform: translateY(50px); }
+    from { opacity: 0; transform: translateY(80px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
 /* --- Card de Dispositivo Individual --- */
 .device-card {
-    background-color: var(--color-bg-secondary); /* Fundo do card */
-    border-radius: var(--border-radius-lg); /* Cantos arredondados */
+    background-color: var(--color-bg-secondary);
+    border-radius: var(--border-radius-lg);
     padding: var(--spacing-lg);
     text-align: center;
-    box-shadow: 0 8px 25px var(--color-shadow-dark); /* Sombra mais pronunciada */
-    transition: transform var(--transition-normal), box-shadow var(--transition-normal), background-color var(--transition-normal); /* Transições suaves para interatividade */
+    box-shadow: var(--shadow-deep);
+    transition: transform var(--transition-normal), box-shadow var(--transition-normal), background-color var(--transition-normal);
     display: flex;
-    flex-direction: column; /* Organiza conteúdo em coluna */
-    justify-content: space-between; /* Espaça o conteúdo verticalmente */
-    min-height: 280px; /* Altura mínima para padronizar */
-    border: 1px solid rgba(255,255,255,0.05); /* Borda sutil */
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 300px; /* Altura mínima ajustada */
+    border: 1px solid var(--color-bg-tertiary); /* Borda sutil */
+    position: relative; /* Para o efeito de borda luminosa */
+    overflow: hidden; /* Para esconder o brilho que 'sai' do card */
+}
+
+/* Efeito de borda luminosa no hover */
+.device-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 2px solid transparent;
+    border-radius: var(--border-radius-lg);
+    pointer-events: none;
+    transition: border-color var(--transition-normal), box-shadow var(--transition-normal);
+    box-shadow: 0 0 0px var(--color-border-glow);
 }
 
 .device-card:hover {
-    transform: translateY(-10px) scale(1.02); /* Efeito de "levitar" e crescer levemente */
-    box-shadow: 0 15px 40px rgba(0,0,0,0.8); /* Sombra ainda maior no hover */
-    background-color: #1f2a4f; /* Leve alteração na cor de fundo no hover */
+    transform: translateY(-15px) scale(1.03);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+    background-color: #1a1a2e; /* Escurece um pouco mais no hover */
 }
 
+.device-card:hover::before {
+    border-color: var(--color-border-glow);
+    box-shadow: 0 0 25px var(--color-border-glow); /* Brilho na borda */
+}
+
+
 .device-card.inactive {
-    opacity: 0.5; /* Reduz opacidade para indicar inatividade */
-    filter: grayscale(80%); /* Torna o card cinza */
-    cursor: not-allowed; /* Altera o cursor */
-    pointer-events: none; /* Desativa eventos de clique */
-    transition: opacity var(--transition-normal);
+    opacity: 0.6;
+    filter: grayscale(100%); /* Torna mais cinza */
+    cursor: not-allowed;
+    pointer-events: none;
+    transition: opacity var(--transition-normal), filter var(--transition-normal);
+}
+
+.device-card.inactive::before {
+    border-color: transparent !important; /* Remove borda de brilho em inativos */
+    box-shadow: none !important;
 }
 
 .device-icon {
-    font-size: 5em; /* Ícone grande */
+    font-size: 6em; /* Ícone maior */
     margin-bottom: 0.5em;
     line-height: 1;
-    color: var(--color-button-on); /* Cor do ícone */
-    transition: transform 0.3s ease-out;
+    color: var(--color-accent-blue);
+    transition: transform 0.3s ease-out, text-shadow 0.3s ease-out;
+    text-shadow: 0 0 10px rgba(0, 188, 212, 0.4);
 }
 
 .device-card:hover .device-icon {
-    transform: rotate(10deg) scale(1.1); /* Animação no ícone ao passar o mouse no card */
+    transform: rotate(10deg) scale(1.15);
+    text-shadow: 0 0 20px var(--color-accent-blue), 0 0 35px var(--color-accent-blue);
 }
 
 .device-card h3 {
-    font-size: 2em;
-    margin-bottom: 1rem;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.2em;
+    margin-bottom: 1.2rem;
     color: var(--color-text-light);
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.7);
+}
+
+.status-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-xs);
+    margin-bottom: var(--spacing-md);
+}
+
+.status-dot {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.8);
+    animation: pulse 1.5s infinite alternate;
+}
+
+.status-dot.status-on {
+    background-color: var(--color-button-on);
+    box-shadow: var(--glow-on);
+}
+
+.status-dot.status-off {
+    background-color: var(--color-button-off);
+    box-shadow: var(--glow-off);
+}
+
+.status-dot.inactive-dot {
+    background-color: var(--color-disabled);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    animation: none; /* Desativa pulso para inativos */
 }
 
 .relay-status {
     font-size: 1.2em;
     font-weight: 600;
-    margin-bottom: var(--spacing-md);
     color: var(--color-text-muted);
 }
 
-.relay-status span {
-    display: inline-block;
-    padding: 0.5em 1em;
-    border-radius: 9999px; /* Formato de pílula */
-    font-size: 0.9em;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+.relay-status .relay-text {
     font-weight: bold;
-    color: var(--color-bg-primary); /* Cor do texto dentro da pílula */
-    box-shadow: 0 0 15px rgba(0,0,0,0.5); /* Sombra interna para o status */
-    animation: pulseGlow 2s infinite alternate; /* Animação de pulso */
+    color: var(--color-text-light);
 }
 
-.relay-status.status-on span {
-    background-color: var(--color-status-on);
+/* Animação de pulso para o status dot */
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(1.2); opacity: 0.7; }
 }
-
-.relay-status.status-off span {
-    background-color: var(--color-status-off);
-}
-
-/* Animação de pulso para o status (verde para ON, vermelho para OFF) */
-@keyframes pulseGlow {
-    0% { transform: scale(1); box-shadow: 0 0 15px rgba(0,0,0,0.5); }
-    50% { transform: scale(1.03); box-shadow: 0 0 25px var(--color-status-on); } /* Ajuste de cor conforme status */
-    100% { transform: scale(1); box-shadow: 0 0 15px rgba(0,0,0,0.5); }
-}
-/* Nota: a cor do brilho no @keyframes 'pulseGlow' é genérica. O CSS do span acima define a cor de fundo real.
-   Poderíamos ter duas animações separadas (pulseGlowOn, pulseGlowOff) para brilhos de cores diferentes, mas essa é uma solução mais concisa. */
 
 
 /* --- Botões de Controle --- */
 .button-group {
     display: flex;
-    gap: var(--spacing-sm); /* Espaçamento entre os botões */
-    margin-top: auto; /* Empurra o grupo de botões para o final do card */
+    gap: var(--spacing-sm);
+    margin-top: auto;
 }
 
 .control-button {
-    flex: 1; /* Faz os botões ocuparem o mesmo espaço */
-    padding: 0.9rem 1.2rem;
+    flex: 1;
+    padding: 1rem 1.5rem;
     border-radius: var(--border-radius-md);
     text-decoration: none;
     font-weight: 700;
-    font-size: 1.05em;
+    font-size: 1.1em;
     text-align: center;
     transition: background-color var(--transition-fast), transform 0.1s ease, box-shadow var(--transition-fast);
-    box-shadow: 0 3px 10px var(--color-shadow-dark);
-    border: none; /* Remove borda padrão */
+    box-shadow: 0 5px 15px var(--color-shadow-dark);
+    border: none;
     cursor: pointer;
-    user-select: none; /* Evita seleção de texto ao clicar/arrastar */
-    color: var(--color-bg-primary); /* Cor do texto do botão */
+    user-select: none;
+    color: var(--color-bg-primary); /* Texto escuro dentro do botão */
     text-transform: uppercase;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.05em;
+    position: relative; /* Para efeito de brilho interno */
+    overflow: hidden; /* Para esconder brilho que 'sai' do botão */
+}
+
+/* Efeito de brilho interno para botões */
+.control-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+}
+
+.control-button:hover::before {
+    width: 200%;
+    height: 200%;
+    opacity: 1;
 }
 
 .control-button.on {
-    background-color: var(--color-button-on); /* Cor verde para Ligar */
+    background-color: var(--color-button-on);
 }
 
 .control-button.on:hover {
-    background-color: #27c277; /* Tom um pouco mais escuro no hover */
-    transform: translateY(-3px); /* Efeito de "subir" no hover */
-    box-shadow: 0 6px 15px rgba(52, 225, 137, 0.5); /* Sombra com brilho verde */
+    background-color: #00c766; /* Tom um pouco mais escuro no hover */
+    transform: translateY(-5px);
+    box-shadow: var(--glow-on);
 }
 
 .control-button.on:active {
-    transform: translateY(0); /* Retorna à posição original ao clicar */
-    box-shadow: 0 1px 5px var(--color-shadow-dark); /* Sombra mais sutil ao clicar */
+    transform: translateY(0);
+    box-shadow: 0 1px 5px var(--color-shadow-dark);
 }
 
 .control-button.off {
-    background-color: var(--color-button-off); /* Cor vermelha para Desligar */
+    background-color: var(--color-button-off);
 }
 
 .control-button.off:hover {
-    background-color: #d13a52; /* Tom um pouco mais escuro no hover */
-    transform: translateY(-3px);
-    box-shadow: 0 6px 15px rgba(233, 69, 96, 0.5); /* Sombra com brilho vermelho */
+    background-color: #d8163f; /* Tom um pouco mais escuro no hover */
+    transform: translateY(-5px);
+    box-shadow: var(--glow-off);
 }
 
 .control-button.off:active {
@@ -310,14 +419,19 @@ body {
 }
 
 .control-button.disabled {
-    background-color: var(--color-disabled); /* Cor para botões desativados */
+    background-color: var(--color-disabled);
     cursor: not-allowed;
     opacity: 0.7;
     box-shadow: none;
     color: var(--color-text-muted);
+    pointer-events: none; /* Desativa cliques */
 }
 
-/* --- Seções Ocultas (para futuras expansões de navegação) --- */
+.control-button.disabled::before { /* Desativa brilho interno para botões desativados */
+    display: none;
+}
+
+/* --- Seções Ocultas --- */
 .hidden-section {
     display: none; /* Mantém essas seções invisíveis por padrão */
     text-align: center;
@@ -331,48 +445,77 @@ body {
 
 /* --- Rodapé Principal (main-footer) --- */
 .main-footer {
-    background-color: var(--color-bg-secondary); /* Fundo do rodapé */
+    background-color: var(--color-bg-secondary);
     padding: var(--spacing-md) 0;
     text-align: center;
     color: var(--color-text-muted);
     font-size: 0.9em;
-    border-top: 1px solid rgba(255,255,255,0.08); /* Borda superior sutil */
-    box-shadow: 0 -2px 10px var(--color-shadow-dark); /* Sombra superior */
+    border-top: 1px solid var(--color-bg-tertiary);
+    box-shadow: 0 -5px 15px rgba(0,0,0,0.4);
+    margin-top: var(--spacing-lg);
 }
 
 .main-footer p {
-    margin-bottom: 0.4rem; /* Pequeno espaçamento entre as linhas do rodapé */
+    margin-bottom: 0.4rem;
 }
 
 /* --- Responsividade (Media Queries) --- */
-/* Ajustes para telas menores, como tablets e celulares */
+@media (max-width: 992px) {
+    .section-title {
+        font-size: 2.5em;
+    }
+    .device-card {
+        min-height: 280px;
+    }
+    .device-icon {
+        font-size: 5em;
+    }
+    .device-card h3 {
+        font-size: 2em;
+    }
+    .control-button {
+        font-size: 1em;
+        padding: 0.9rem 1.2rem;
+    }
+}
+
 @media (max-width: 768px) {
     .main-header .container {
-        flex-direction: column; /* Empilha o título e a navegação */
+        flex-direction: column;
         gap: var(--spacing-sm);
     }
     .main-header h1 {
-        font-size: 1.8em;
+        font-size: 2em;
+        text-align: center;
     }
     .main-header nav ul {
-        flex-direction: column; /* Empilha os links de navegação */
+        flex-direction: column;
         gap: var(--spacing-xs);
     }
     .section-title {
         font-size: 2em;
     }
+    .status-message {
+        font-size: 1.2em;
+    }
+    .card-grid {
+        grid-template-columns: 1fr; /* Uma coluna em telas pequenas */
+    }
     .device-card {
+        min-height: 260px;
         padding: var(--spacing-md);
-        min-height: 250px; /* Reduz um pouco a altura mínima */
     }
     .device-icon {
         font-size: 4em;
     }
     .device-card h3 {
-        font-size: 1.6em;
+        font-size: 1.8em;
+    }
+    .relay-status {
+        font-size: 1.1em;
     }
     .control-button {
-        padding: 0.7rem 1rem;
+        padding: 0.8rem 1rem;
         font-size: 0.9em;
     }
     .button-group {
@@ -382,29 +525,38 @@ body {
 
 @media (max-width: 480px) {
     .main-header h1 {
-        font-size: 1.5em;
+        font-size: 1.7em;
+    }
+    .main-header nav a {
+        font-size: 1em;
+        gap: 5px;
     }
     .section-title {
-        font-size: 1.6em;
+        font-size: 1.8em;
+        padding-bottom: 0.5rem;
+    }
+    .section-title::after {
+        width: 100px;
+        height: 3px;
     }
     .status-message {
         font-size: 1em;
-        padding: 0.7rem 1rem;
+        padding: 0.8rem 1rem;
     }
     .device-card {
         padding: var(--spacing-sm);
     }
     .device-icon {
-        font-size: 3em;
+        font-size: 3.5em;
     }
     .device-card h3 {
-        font-size: 1.4em;
+        font-size: 1.6em;
     }
     .relay-status {
-        font-size: 0.9em;
+        font-size: 1em;
     }
-    .relay-status span {
-        font-size: 0.8em;
-        padding: 0.4em 0.8em;
+    .status-dot {
+        width: 12px;
+        height: 12px;
     }
 }
