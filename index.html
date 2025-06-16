@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Automação Residencial - Neto.dev</title>
+
+    <link rel="stylesheet" href="/style.css">
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏠</text></svg>">
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <h1>Smart Home Control Panel</h1>
+            <nav>
+                <ul>
+                    <li><a href="#dashboard">Dashboard</a></li>
+                    <li><a href="#devices">Dispositivos</a></li>
+                    <li><a href="#settings">Configurações</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content container">
+        <section id="dashboard" class="dashboard-section">
+            <h2 class="section-title">Visão Geral do Sistema</h2>
+            <p class="status-message">{message}</p>
+
+            <div class="card-grid">
+                <div class="device-card active">
+                    <div class="device-icon">💡</div> <h3>Relé Principal</h3>
+                    <p class="relay-status {status_class}">Status: <span>{relay_status_text}</span></p>
+                    <div class="button-group">
+                        <a href="/RELE/ON" class="control-button on">Ligar</a>
+                        <a href="/RELE/OFF" class="control-button off">Desligar</a>
+                    </div>
+                </div>
+
+                <div class="device-card inactive">
+                    <div class="device-icon">🌡️</div> <h3>Termostato</h3>
+                    <p class="relay-status inactive-status">Status: <span>Desativado</span></p>
+                    <div class="button-group">
+                        <button class="control-button disabled">Ativar</button>
+                        <button class="control-button disabled">Desativar</button>
+                    </div>
+                </div>
+
+                <div class="device-card inactive">
+                    <div class="device-icon">🚪</div> <h3>Fechadura Inteligente</h3>
+                    <p class="relay-status inactive-status">Status: <span>Trancado</span></p>
+                    <div class="button-group">
+                        <button class="control-button disabled">Abrir</button>
+                        <button class="control-button disabled">Fechar</button>
+                    </div>
+                </div>
+
+                <div class="device-card inactive">
+                    <div class="device-icon">📹</div> <h3>Câmera de Segurança</h3>
+                    <p class="relay-status inactive-status">Status: <span>Offline</span></p>
+                    <div class="button-group">
+                        <button class="control-button disabled">Ver Live</button>
+                        <button class="control-button disabled">Gravar</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="devices" class="hidden-section">
+            <h2 class="section-title">Meus Dispositivos</h2>
+            <p>Gerencie todos os seus dispositivos de casa inteligente.</p>
+        </section>
+
+        <section id="settings" class="hidden-section">
+            <h2 class="section-title">Configurações do Sistema</h2>
+            <p>Ajuste as preferências e configurações de segurança.</p>
+        </section>
+
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <p>&copy; 2025 Direitos Reservados Neto.dev</p>
+            <p>Simulador de Automação Residencial</p>
+        </div>
+    </footer>
+</body>
+</html>
